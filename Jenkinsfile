@@ -30,23 +30,23 @@ pipeline {
 				echo "Test integration"
 			}
 		}
-		// stage('Build Docker Image'){
-		// 	steps{
-		// 		script{
-		// 			dockerImage = docker.build("danjaime/currency-exchange-devops/general:${env.BUILD_TAG}")
-		// 		}
-		// 	}
-		// }
-		// stage('Push Docker Image'){
-		// 	steps{
-		// 		script{
-		// 			docker.withRegistry('','dockerhub'){
-		// 				dockerImage.push()
-		// 				dockerImage.push('latest')
-		// 			}
-		// 		}
-		// 	}
-		// }
+		stage('Build Docker Image'){
+			steps{
+				script{
+					dockerImage = docker.build("danjaime/currency-exchange-devops/general:${env.BUILD_TAG}")
+				}
+			}
+		}
+		stage('Push Docker Image'){
+			steps{
+				script{
+					docker.withRegistry('','dockerhub'){
+						dockerImage.push()
+						dockerImage.push('latest')
+					}
+				}
+			}
+		}
 	}
 	post{
 		always{
